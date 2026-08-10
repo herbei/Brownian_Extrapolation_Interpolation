@@ -84,7 +84,7 @@ simulate_f0 = function(x,a){
       if (!flag) stop("conditions for f_0 are not met.")
       
       
-      #. a <= 1
+      # Region 1: a <= 1
       #------------------------
       if(a <= 1){
             
@@ -105,7 +105,7 @@ simulate_f0 = function(x,a){
       #------------------------
       
       
-      # x >= 1 ==> a >= 2
+      # Region 2: x >= 1 ==> a >= 2
       #------------------------
       if(x >= 1){
             sw=0
@@ -125,6 +125,7 @@ simulate_f0 = function(x,a){
       #-----------------------
       
       
+      # Region 3: x < 1, a > 1 
       #-----------------------
       if( (x<1) & (a>1) ){
             sw=0
@@ -471,7 +472,7 @@ extrapolate_bm_II = function(t,a){
       
       alpha = myalpha(t,a)
       beta = mybeta(t,a)
-      alpha0 = 1.091082
+      alpha0 = 1.086165
       N0 = func_n0(alpha, beta)      
       
       
@@ -619,10 +620,10 @@ interpolate_BB_I = function(t,T,x,z,a){
    
       alpha = myalpha(t,a)
       beta = mybeta(t,a)
-      alpha0 = 1.091082
+      alpha0 = 1.086165
       N0 = func_n0(alpha, beta)      
    
-      if(a<2){
+      if( a/sqrt(T-t) < 2 ){
             C <- func_C1_g(T-t,z,a)
       }else{
             C <- func_C2_g(T-t,z,a)
@@ -635,12 +636,6 @@ interpolate_BB_I = function(t,T,x,z,a){
             Y = extrapolate_bm_I(t,x,a)
             U = runif(1,0,1)
             
-            # accept / reject test
-            #if(U*C < g_series(Y,T-t,z,a)){
-            #      sw=1
-            #      out=Y
-            #      return(out)
-            #}
             
             sw1 = 0
             N = N0
@@ -672,10 +667,10 @@ interpolate_BB_II = function(t,T,z,a){
    
    alpha = myalpha(t,a)
    beta = mybeta(t,a)
-   alpha0 = 1.091082
+   alpha0 = 1.086165
    N0 = func_n0(alpha, beta)   
    
-   if(a<2){
+   if( a/sqrt(T-t) <2 ){
       C <- func_C1_g(T-t,z,a)
    }else{
       C <- func_C2_g(T-t,z,a)
@@ -688,13 +683,6 @@ interpolate_BB_II = function(t,T,z,a){
       U = runif(1,0,1)
       
       
-      #if(U*C < g_series(Y,T-t,z,a)){
-      #   sw=1
-      #   out=Y
-      #   return(out)
-      #}
-      
-      # accept / reject test
       sw1 = 0
       N=N0
       while(!sw1){
@@ -727,10 +715,10 @@ interpolate_BB_III = function(t,T,x,a){
    
    alpha = myalpha(t,a)
    beta = mybeta(t,a)
-   alpha0 = 1.091082
+   alpha0 = 1.086165
    N0 = func_n0(alpha, beta) 
    
-   if(a<2){
+   if( a/sqrt(t) < 2 ){
       C <- func_C1_g(t,x,a)
    }else{
       C <- func_C2_g(t,x,a)
@@ -763,11 +751,6 @@ interpolate_BB_III = function(t,T,x,a){
          }
       }
       
-      #if(U*C < g_series(Y,t,x,a)){
-      #   sw=1
-      #   out=Y
-      #   return(out)
-      #}
    }
 }
 #######################################################
@@ -810,7 +793,7 @@ func_D2_h <- function(t,a){
    
    T3 = (N0+1)^2 * exp( - alpha * (N0+1)^2 )
    
-   out= T1*(T2 + T3)  
+   out= T1*(T2 + T3) *(a/2) 
    return(out)
 }
 
@@ -819,7 +802,7 @@ func_D2_h <- function(t,a){
 interpolate_BB_IV <- function(t,T,a){
    
    
-   alpha0 = 1.091082
+   alpha0 = 1.086165
    alpha = myalpha(T-t,a)
    beta = mybeta(T-t,a)
    N0 = func_n0(alpha,beta)
