@@ -1,0 +1,49 @@
+{
+  "status": "complete",
+  "mode": "full",
+  "started_utc": "2026-09-17T12:11:03.136562+00:00",
+  "a": 2.0,
+  "T": 3.0,
+  "t_values": [
+    0.1,
+    1.0,
+    1.5,
+    2.0,
+    2.5,
+    2.9
+  ],
+  "endpoint_margin": 0.05,
+  "endpoint_grid_points": 5,
+  "scenarios": 216,
+  "B_accept": 2000,
+  "B_time": 10000,
+  "timing_reps": 1,
+  "automatic_time_reversal": true,
+  "python": "3.9.6 (default, Jan  9 2026, 11:03:41) \n[Clang 17.0.0 (clang-1700.6.4.2)]",
+  "executable": "python3",
+  "platform": "macOS-26.0.1-arm64-arm-64bit",
+  "machine": "arm64",
+  "processor": "arm",
+  "timer": "time.perf_counter",
+  "timing_execution": "serial",
+  "acceptance_seed_rule": "100000 + scenario_id",
+  "timing_seed_rule": "200000 + 100*scenario_id + repetition (starting at 1)",
+  "scenario_id_rule": "Restart for each algorithm; time varies fastest, then x, then z",
+  "acceptance_definition": "Accepted draws / outer g-or-h proposals within each scenario",
+  "acceptance_summary": "Arithmetic mean of per-scenario acceptance rates",
+  "timing_summary": "Median across endpoint scenarios of within-scenario median elapsed seconds",
+  "counted_functions": [
+    "ICB_sample_g",
+    "ICB_sample_h"
+  ],
+  "script_sha256": "5d827935dabc658e958ea0b46fc8bb9908d72b4cb6b523e83395707900adb3ac",
+  "sampler_sha256": "8e1d5db54107267feab21efb21fa5206aadd520535e73c5261e1ba72a6325444",
+  "completed_utc": "2026-09-17T12:44:10.938368+00:00",
+  "completed_scenarios": 216,
+  "total_elapsed_sec": 1798.379634375,
+  "measured_source_files": {
+    "sampler": "measured_ICB_gh_samplers.py",
+    "script": "measured_timing_experiment.py"
+  },
+  "release_metadata_note": "The original absolute executable path was reduced to its basename for the portable release. Measurements, environment details, and source hashes are unchanged. The measured source files are stored beside this metadata with the measured_ prefix; measured_source_files identifies their names."
+}
